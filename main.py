@@ -16,5 +16,6 @@ col5 = GridCol([GridPixel(np, 61), GridPixel(np, 62), GridPixel(np, 63), GridPix
 col6 = GridCol([GridPixel(np, 72), GridPixel(np, 73), GridPixel(np, 74), GridPixel(np, 75), GridPixel(np, 76), GridPixel(np, 77), GridPixel(np, 78), GridPixel(np, 79), GridPixel(np, 80), GridPixel(np, 81), GridPixel(np, 82)])
 display = GridDisplay([col0, col1, col2, col3, col4, col5, col6])
 
+display.set_brightness(0.1)
 display.on()
 
