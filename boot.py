@@ -5,7 +5,7 @@ import senko
 import constants
 import secrets
 
-USE_SENKO = False
+USE_SENKO = True
 
 def connect_wlan(ssid, password):
     sta_if = network.WLAN(network.STA_IF)
@@ -42,9 +42,9 @@ def main():
                 "main.py",
                 "lib/constants.py",
                 "lib/nettime.py",
-                "lib/s7digit.py",
-                "lib/s7display.py",
-                "lib/s7segment.py",
+                "lib/grid_display.py",
+                "lib/grid_col.py",
+                "lib/grid_pixel.py",
                 "lib/senko.py",
                 "lib/urequests.py",
             ]
