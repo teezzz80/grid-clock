@@ -3,6 +3,9 @@ from neopixel import NeoPixel
 from grid_display import GridDisplay
 from grid_col import GridCol
 from grid_pixel import GridPixel
+from constants import *
+
+BRIGHTNESS = 0.1  # screen brightness between 0 and 1
 
 n = 83
 np_pin = Pin(25, Pin.OUT)
@@ -16,6 +19,7 @@ col5 = GridCol([GridPixel(np, 61), GridPixel(np, 62), GridPixel(np, 63), GridPix
 col6 = GridCol([GridPixel(np, 72), GridPixel(np, 73), GridPixel(np, 74), GridPixel(np, 75), GridPixel(np, 76), GridPixel(np, 77), GridPixel(np, 78), GridPixel(np, 79), GridPixel(np, 80), GridPixel(np, 81), GridPixel(np, 82)])
 display = GridDisplay([col0, col1, col2, col3, col4, col5, col6])
 
-display.set_brightness(0.1)
+display.set_brightness(BRIGHTNESS)
+display.render_font(0, 0, TIME_FONT[0])
 display.on()
 

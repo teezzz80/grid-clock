@@ -1,42 +1,15 @@
-SEG_A = 0
-SEG_B = 1
-SEG_C = 2
-SEG_D = 3
-SEG_E = 4
-SEG_F = 5
-SEG_G = 6
-
-CHARS = {
-    '0': [SEG_A, SEG_B, SEG_C, SEG_D, SEG_E, SEG_F],
-    '1': [SEG_B, SEG_C],
-    '2': [SEG_A, SEG_B, SEG_G, SEG_E, SEG_D],
-    '3': [SEG_A, SEG_B, SEG_G, SEG_C, SEG_D],
-    '4': [SEG_B, SEG_G, SEG_F, SEG_C],
-    '5': [SEG_A, SEG_F, SEG_G, SEG_C, SEG_D],
-    '6': [SEG_A, SEG_F, SEG_G, SEG_C, SEG_D, SEG_E],
-    '7': [SEG_A, SEG_B, SEG_C],
-    '8': [SEG_A, SEG_B, SEG_C, SEG_D, SEG_E, SEG_F, SEG_G],
-    '9': [SEG_A, SEG_B, SEG_C, SEG_D, SEG_F, SEG_G],    
-    'A': [SEG_A, SEG_B, SEG_C, SEG_E, SEG_F, SEG_G],
-    'B': [SEG_C, SEG_D, SEG_E, SEG_F, SEG_G],
-    'C': [SEG_D, SEG_E, SEG_G],
-    'D': [SEG_B, SEG_C, SEG_D, SEG_E, SEG_G],
-    'E': [SEG_A, SEG_F, SEG_E, SEG_D, SEG_G],
-    'F': [SEG_A, SEG_F, SEG_G, SEG_E],
-    'G': [SEG_A, SEG_B, SEG_F, SEG_G, SEG_C, SEG_D],
-    'H': [SEG_B, SEG_F, SEG_G, SEG_C, SEG_E],
-    'I': [SEG_E],
-    'J': [SEG_B, SEG_C, SEG_D],
-    'L': [SEG_F, SEG_E, SEG_D],
-    'N': [SEG_C, SEG_G, SEG_E],
-    'O': [SEG_G, SEG_C, SEG_D, SEG_E],
-    'P': [SEG_A, SEG_B, SEG_G, SEG_F, SEG_E],
-    'Q': [SEG_A, SEG_B, SEG_G, SEG_F, SEG_C],
-    'R': [SEG_E, SEG_G],
-    'S': [SEG_A, SEG_F, SEG_G, SEG_C, SEG_D],
-    'U': [SEG_F, SEG_E, SEG_D, SEG_C, SEG_B],
-    'Y': [SEG_F, SEG_G, SEG_B, SEG_C, SEG_D],
-}
+TIME_FONT = [
+    '111 101 101 101 101 101 101 111',  #0
+    '010 010 010 010 010 010 010 010',  #1
+    '111 001 001 111 100 100 100 111',  #2
+    '111 001 001 111 001 001 001 111',  #3
+    '101 101 101 111 001 001 001 001',  #4
+    '111 100 100 111 001 001 001 111',  #5
+    '111 100 100 111 101 101 101 111',  #6
+    '111 001 001 001 001 001 001 001',  #7
+    '111 101 101 111 101 101 101 111',  #8
+    '111 101 101 111 001 001 001 111',  #9
+]
 
 COLORS = {
     'red': (255, 0, 0),
