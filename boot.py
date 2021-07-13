@@ -1,11 +1,11 @@
 import gc
 import machine
 import network
+import neopixel
 import senko
 import secrets
-from neopixel import NeoPixel
-from constants import *
 
+USE_SENKO = True
 
 def connect_wlan(ssid, password):
     sta_if = network.WLAN(network.STA_IF)
@@ -32,11 +32,13 @@ def main():
     gc.enable()
 
     led_pin = machine.Pin(27, machine.Pin.OUT)
-    np = NeoPixel(led_pin, 1)
+    np = neopixel.NeoPixel(led_pin, 1)
     np[0] = (255, 0, 0)
+    np.write()
 
     if USE_SENKO:
         np[0] = (0, 255, 0)
+        np.write()
         connect_wlan(secrets.WIFI_SSID, secrets.WIFI_PASSWORD)
         
         OTA = senko.Senko(
@@ -59,6 +61,7 @@ def main():
             machine.reset()
 
     np[0] = (0, 0, 255)
+    np.write()
 
 if __name__ == "__main__":
     main()

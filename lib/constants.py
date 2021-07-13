@@ -1,4 +1,3 @@
-USE_SENKO = True
 API_URL = "http://worldtimeapi.org/api/timezone/America/Edmonton"
 WEB_QUERY_DELAY = 3600  # sync time delay in s, default is 3600
 RETRY_DELAY = 5  # sync time retry delay in s

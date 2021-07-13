@@ -21,7 +21,7 @@ class GridDisplay:
             col.set_brightness(brightness)
 
 
-    def pattern(self, col, row, pattern_string, color):
+    def pattern(self, col, row, pattern_string, color=(0, 255, 0)):
         pattern_array = pattern_string.split()
         cursor_col = col
         cursor_row = row
@@ -36,7 +36,7 @@ class GridDisplay:
             cursor_row += 1
 
     
-    def message(self, message, color):
+    def message(self, message, color=(0, 255, 0)):
         self.off()
         self.pattern(0, 0, ALPHA_FONT[ALPHA_ENUM[message[0]]], color)
         self.pattern(4, 0, ALPHA_FONT[ALPHA_ENUM[message[1]]], color)
