@@ -1,11 +1,39 @@
 from machine import Pin, RTC
 from neopixel import NeoPixel
+from nettime import NetTime
+import time, utime
 from grid_display import GridDisplay
 from grid_col import GridCol
 from grid_pixel import GridPixel
 from constants import *
+from secrets import *
 
-BRIGHTNESS = 0.1  # screen brightness between 0 and 1
+def get_datetime_element(datetime, element):
+    return list(datetime)[DATETIME_ENUM[element]]
+
+    
+def display_clock(datetime):
+    if not is_display_off:
+        render_time(datetime, False)
+
+
+def render_time(datetime, force):
+    hour = get_datetime_element(datetime, "hour")
+    minute = get_datetime_element(datetime, "minute")
+    if hour != last_hour or minute != last_minute:
+        display.off()
+        (upper_hour, lower_hour) = divmod(hour, 10)
+        (upper_minute, lower_minute) = divmod(minute, 10)
+        if upper_hour != 0:
+            display.pattern(0, 0, TIME_FONT[upper_hour], COLORS['orange'])
+        display.pattern(1, CHARS[str(lower_hour)])
+        display.pattern(2, CHARS[str(upper_minute)])
+        display.pattern(3, CHARS[str(lower_minute)])
+
+
+is_display_off = False
+last_hour = None
+last_minute = None
 
 n = 83
 np_pin = Pin(25, Pin.OUT)
@@ -19,5 +47,28 @@ col5 = GridCol([GridPixel(np, 71), GridPixel(np, 70), GridPixel(np, 69), GridPix
 col6 = GridCol([GridPixel(np, 72), GridPixel(np, 73), GridPixel(np, 74), GridPixel(np, 75), GridPixel(np, 76), GridPixel(np, 77), GridPixel(np, 78), GridPixel(np, 79), GridPixel(np, 80), GridPixel(np, 81), GridPixel(np, 82)])
 display = GridDisplay([col0, col1, col2, col3, col4, col5, col6])
 
+display.off()
 display.set_brightness(BRIGHTNESS)
-display.render_font(0, 0, TIME_FONT[0])
+display.render_font(0, 0, TIME_FONT[0], COLORS[green])
+
+nt = NetTime(WIFI_SSID, WIFI_PASSWORD)
+rtc = RTC()
+now = None
+update_time = utime.time() - WEB_QUERY_DELAY  # always sync time on start
+
+while True:
+    if utime.time() - update_time >= WEB_QUERY_DELAY:
+        display.message("Sync")
+        netTime = nt.sync_time(API_URL)
+        if netTime[0] != "error":
+            rtc.datetime(netTime) # update internal rtc time
+            update_time = utime.time()
+        else:
+            display.message("Err")
+            update_time = utime.time() - WEB_QUERY_DELAY + RETRY_DELAY
+    
+    now = rtc.datetime()
+
+    display_clock(now)
+
+    time.sleep_ms(REFRESH_DELAY)

@@ -21,14 +21,26 @@ class GridDisplay:
             col.set_brightness(brightness)
 
 
-    def render_font(self, col, row, font_string):
-        font_array = font_string.split()
+    def pattern(self, col, row, pattern_string, color):
+        pattern_array = pattern_string.split()
         cursor_col = col
         cursor_row = row
-        for font_row in font_array:
-            for font_pixel in font_row:
-                if font_pixel == "1":
-                    self.col_list[cursor_col].pixel_list[cursor_row].on()
+        for pattern_row in pattern_array:
+            for pattern_pixel in pattern_row:
+                if pattern_pixel == "1":
+                    pixel = self.col_list[cursor_col].pixel_list[cursor_row]
+                    pixel.set_color(color)
+                    pixel.on()
                 cursor_col += 1
             cursor_col = col
             cursor_row += 1
+
+    
+    def message(self, message, color):
+        self.off()
+        self.pattern(0, 0, ALPHA_FONT[ALPHA_ENUM[message[0]]], color)
+        self.pattern(4, 0, ALPHA_FONT[ALPHA_ENUM[message[1]]], color)
+        self.pattern(0, 6, ALPHA_FONT[ALPHA_ENUM[message[2]]], color)
+        self.pattern(4, 6, ALPHA_FONT[ALPHA_ENUM[message[3]]], color)
+        
+

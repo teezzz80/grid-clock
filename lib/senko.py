@@ -31,10 +31,10 @@ class Senko:
         y = y_hash.digest()
 
         if str(x) == str(y):
-            print("[Senko] No change")
+            print(" No change")
             return True
         else:
-            print("[Senko] Changes detected")
+            print(" Changes detected")
             return False
 
     def _get_file(self, url):
@@ -51,7 +51,7 @@ class Senko:
         changes = []
 
         for file in self.files:
-            print("[Senko] Checking {}... ".format(file))
+            print("[Senko] Checking {}... ".format(file), end="")
             latest_version = self._get_file(self.url + "/" + file)
             if latest_version is None:
                 continue

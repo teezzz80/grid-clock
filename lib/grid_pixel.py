@@ -3,6 +3,9 @@ class GridPixel:
         self.brightness = 1
         self.np = np
         self.pixel = [np_id, (255, 0, 0), 1] # [id, (r, g, b), brightness]
+        self.orig_color = self.pixel[1]
+        self.orig_brightness = self.pixel[2]
+        self.is_on = False
         
     
     def set_color(self, color):
@@ -21,8 +24,11 @@ class GridPixel:
 
 
     def on(self):
-        self.np[self.pixel[0]] = self.get_raw_color(self.pixel[1], self.pixel[2])
-        self.np.write()
+        if self.is_off or self.orig_color != self.pixel[1] or self.orig_brightness != self.pixel[2]:
+            self.np[self.pixel[0]] = self.get_raw_color(self.pixel[1], self.pixel[2])
+            self.np.write()
+            self.orig_color = self.pixel[1]
+            self.orig_brightness = self.pixel[2]
         
     
     def off(self):
