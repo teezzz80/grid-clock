@@ -1,12 +1,12 @@
 API_URL = "http://worldtimeapi.org/api/timezone/America/Edmonton"
 WEB_QUERY_DELAY = 3600  # sync time delay in s, default is 3600
 RETRY_DELAY = 5  # sync time retry delay in s
-BRIGHTNESS = 0.1  # screen brightness between 0 and 1
+BRIGHTNESS = 0.5  # screen brightness between 0 and 1
 REFRESH_DELAY = 5000  # display refresh delay in ms
 
 TIME_FONT = [
     '111 101 101 101 111',  #0
-    '010 010 010 010 010',  #1
+    '001 001 001 001 001',  #1
     '111 001 111 100 111',  #2
     '111 001 111 001 111',  #3
     '101 101 111 001 001',  #4
