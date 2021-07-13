@@ -5,7 +5,7 @@ import neopixel
 import senko
 import secrets
 
-USE_SENKO = True
+USE_SENKO = False
 
 def connect_wlan(ssid, password):
     sta_if = network.WLAN(network.STA_IF)

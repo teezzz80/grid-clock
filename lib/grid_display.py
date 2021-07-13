@@ -1,3 +1,5 @@
+from constants import *
+
 class GridDisplay:
     def __init__(self, col_list):
         self.col_list = col_list
@@ -21,7 +23,7 @@ class GridDisplay:
             col.set_brightness(brightness)
 
 
-    def pattern(self, col, row, pattern_string, color=(0, 255, 0)):
+    def pattern(self, col, row, pattern_string, color=COLORS["green"]):
         pattern_array = pattern_string.split()
         cursor_col = col
         cursor_row = row
@@ -36,11 +38,12 @@ class GridDisplay:
             cursor_row += 1
 
     
-    def message(self, message, color=(0, 255, 0)):
+    def message(self, message, color=COLORS["green"]):
         self.off()
-        self.pattern(0, 0, ALPHA_FONT[ALPHA_ENUM[message[0]]], color)
-        self.pattern(4, 0, ALPHA_FONT[ALPHA_ENUM[message[1]]], color)
-        self.pattern(0, 6, ALPHA_FONT[ALPHA_ENUM[message[2]]], color)
-        self.pattern(4, 6, ALPHA_FONT[ALPHA_ENUM[message[3]]], color)
+        msg = message.upper()
+        self.pattern(0, 0, ALPHA_FONT[ALPHA_ENUM[msg[0]]], color)
+        self.pattern(4, 0, ALPHA_FONT[ALPHA_ENUM[msg[1]]], color)
+        self.pattern(0, 6, ALPHA_FONT[ALPHA_ENUM[msg[2]]], color)
+        self.pattern(4, 6, ALPHA_FONT[ALPHA_ENUM[msg[3]]], color)
         
 

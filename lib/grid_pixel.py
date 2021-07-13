@@ -24,7 +24,7 @@ class GridPixel:
 
 
     def on(self):
-        if self.is_off or self.orig_color != self.pixel[1] or self.orig_brightness != self.pixel[2]:
+        if self.is_on == False or self.orig_color != self.pixel[1] or self.orig_brightness != self.pixel[2]:
             self.np[self.pixel[0]] = self.get_raw_color(self.pixel[1], self.pixel[2])
             self.np.write()
             self.orig_color = self.pixel[1]
