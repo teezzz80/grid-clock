@@ -1,26 +1,37 @@
 from constants import *
 
 class GridDisplay:
-    def __init__(self, col_list):
+    def __init__(self, np, col_list):
+        self.np = np
         self.col_list = col_list
+        self.brightness = 1
         self.is_on = False
 
 
     def on(self):
-        for col in self.col_list:
-            col.on()
-        self.is_on = True
+        self.np.write()
 
     
     def off(self):
-        for col in self.col_list:
-            col.off()
-        self.is_on = False
+        self.clear()
+        self.np.write()
+
+
+    def clear(self):
+        n = self.np.n
+        for i in range(n):
+            self.np[i] = (0, 0, 0)
+
+
+    def get_raw_color(self, color, brightness):
+        raw_color = [0, 0, 0]
+        for i in range(3):
+            raw_color[i] = int(color[i] * brightness)
+        return tuple(raw_color)
 
 
     def set_brightness(self, brightness):
-        for col in self.col_list:
-            col.set_brightness(brightness)
+        self.brightness = brightness
 
 
     def pattern(self, col, row, pattern_string, color=COLORS["green"]):
@@ -30,9 +41,8 @@ class GridDisplay:
         for pattern_row in pattern_array:
             for pattern_pixel in pattern_row:
                 if pattern_pixel == "1":
-                    pixel = self.col_list[cursor_col].pixel_list[cursor_row]
-                    pixel.set_color(color)
-                    pixel.on()
+                    np_id = self.col_list[cursor_col][cursor_row]
+                    self.np[np_id] = self.get_raw_color(color, self.brightness)
                 cursor_col += 1
             cursor_col = col
             cursor_row += 1
