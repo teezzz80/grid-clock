@@ -49,7 +49,6 @@ display = GridDisplay([col0, col1, col2, col3, col4, col5, col6])
 
 display.off()
 display.set_brightness(BRIGHTNESS)
-display.render_font(0, 0, TIME_FONT[0], COLORS[green])
 
 nt = NetTime(WIFI_SSID, WIFI_PASSWORD)
 rtc = RTC()
