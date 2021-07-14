@@ -1,4 +1,5 @@
 import network, urequests
+from constants import *
 
 class NetTime:
     def __init__(self, ssid, password):
@@ -18,6 +19,10 @@ class NetTime:
         self.wlan.disconnect()
         self.wlan.active(False)
     
+
+    def get_datetime_element(datetime, element):
+        return list(datetime)[DATETIME_ENUM[element]]
+
 
     def sync_time(self, api_url):
         self.wlan = network.WLAN(network.STA_IF)
