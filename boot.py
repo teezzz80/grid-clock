@@ -33,11 +33,13 @@ def main():
 
     led_pin = machine.Pin(27, machine.Pin.OUT)
     np = neopixel.NeoPixel(led_pin, 1)
-    np[0] = (255, 0, 0)
+    np[0] = (0, 0, 0)
+    np.write()
+    np[0] = (20, 0, 0)
     np.write()
 
     if USE_SENKO:
-        np[0] = (0, 255, 0)
+        np[0] = (0, 20, 0)
         np.write()
         connect_wlan(secrets.WIFI_SSID, secrets.WIFI_PASSWORD)
         
@@ -60,7 +62,7 @@ def main():
             print("Updated to the latest version! Rebooting...")
             machine.reset()
 
-    np[0] = (0, 0, 255)
+    np[0] = (0, 0, 20)
     np.write()
 
 if __name__ == "__main__":

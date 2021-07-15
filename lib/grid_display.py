@@ -12,11 +12,13 @@ class GridDisplay:
 
     def on(self):
         self.np.write()
+        self.is_on = True
 
     
     def off(self):
         self.clear()
         self.np.write()
+        self.is_on = False
 
 
     def clear(self):

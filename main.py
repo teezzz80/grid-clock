@@ -8,10 +8,10 @@ from secrets import *
 
 
 def render_time(datetime, force=False):
-    global is_display_off, last_hour, last_minute
+    global last_hour, last_minute
     hour = NetTime.get_datetime_element(datetime, "hour")
     minute = NetTime.get_datetime_element(datetime, "minute")
-    if not is_display_off or hour != last_hour or minute != last_minute or force:
+    if display.is_on or hour != last_hour or minute != last_minute or force:
         display.clear()
         (upper_hour, lower_hour) = divmod(hour, 10)
         (upper_minute, lower_minute) = divmod(minute, 10)
@@ -26,36 +26,32 @@ def render_time(datetime, force=False):
 
 
 def handle_button1(cycle):
-    global is_display_off
+    global now
     if cycle > 1 and cycle <= 3:
         print("Button1 pressed: toggle display")
-        if not is_display_off:
+        if display.is_on:
             display.off()
-            is_display_off = True
         else:
             render_time(now, True)
-            is_display_off = False
-    if cycle > 3 and not is_display_off:
+    if cycle > 3 and display.is_on:
         print("Button1 long pressed: decrease brightness")
         display.decrease_brightness()
         render_time(now, True)
 
 
 def handle_button2(cycle):
-    global is_display_off
-    if cycle > 1 and cycle <= 3 and not is_display_off:
+    global now
+    if cycle > 1 and cycle <= 3 and display.is_on:
         print("Button2 pressed: next theme")
         display.next_theme()
         render_time(now, True)
-    if cycle > 3 and not is_display_off:
+    if cycle > 3 and display.is_on:
         print("Button2 long pressed: increase brightness")
         display.increase_brightness()
         render_time(now, True)
 
 
 try:
-    is_display_off = False
-
     n = 83
     np_pin = Pin(25, Pin.OUT)
     np = NeoPixel(np_pin, n)
@@ -109,13 +105,13 @@ try:
             button2_cycle += 1
         elif button2.value() == 1 and button2_cycle > 0: # button2 is released
             handle_button2(button2_cycle)
-            button2_cycle = 0        
+            button2_cycle = 0
 
         time.sleep_ms(REFRESH_DELAY)
 
 except Exception as ex:
     status_pin = Pin(27, Pin.OUT)
     status_led = NeoPixel(status_pin, 1)
-    status_led[0] = (255, 0, 0)
+    status_led[0] = (20, 0, 0)
     status_led.write()
     raise
