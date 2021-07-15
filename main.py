@@ -32,11 +32,11 @@ def handle_button1(cycle):
         if display.is_on:
             display.off()
         else:
-            render_time(now, True)
+            display.on()
     if cycle > 3 and display.is_on:
         print("Button1 long pressed: decrease brightness")
         display.decrease_brightness()
-        render_time(now, True)
+        display.on()
 
 
 def handle_button2(cycle):
@@ -44,11 +44,11 @@ def handle_button2(cycle):
     if cycle > 1 and cycle <= 3 and display.is_on:
         print("Button2 pressed: next theme")
         display.next_theme()
-        render_time(now, True)
+        display.on()
     if cycle > 3 and display.is_on:
         print("Button2 long pressed: increase brightness")
         display.increase_brightness()
-        render_time(now, True)
+        display.on()
 
 
 try:
